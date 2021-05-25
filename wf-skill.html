@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>wf技能軸計算</title>
+    <link href="skillcalc.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div style="font-size:18px">wf技能軸計算器</div>
+    <div id="container">
+        <!--data table-->
+        <div id="dataTables">
+            <div id="start-weight">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="4">開場充能</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input id="U1start" size="4">%</td>
+                            <td><input id="U2start" size="4">%</td>
+                            <td><input id="U3start" size="4">%</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <hr>充能上限</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input id="U1max" size="4">%</td>
+                            <td><input id="U2max" size="4">%</td>
+                            <td><input id="U3max" size="4">%</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <hr>技能權重</td>
+                        </tr>
+                        <tr>
+                            <td>Main</td>
+                            <td><input id="U1mainsw" size="4"></td>
+                            <td><input id="U2mainsw" size="4"></td>
+                            <td><input id="U3mainsw" size="4"></td>
+                        </tr>
+                        <tr>
+                            <td>Sub</td>
+                            <td><input id="U1subsw" size="4"></td>
+                            <td><input id="U2subsw" size="4"></td>
+                            <td><input id="U3subsw" size="4"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <hr>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--skillsw-->
+            <div class="skillsw">
+                <table>
+                    <tbody id="test">
+                        <tr>
+                            <td colspan='4'>開技充能</td>
+                        </tr>
+                        <tr>
+                            <td>+U1</td>
+                            <td>
+                                <input class='U1skillsw1' size='4'>%<br>
+                                <select class="U1skillsw-counter1">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input class='U1skillsw2' size='4'>%<br>
+                                <select class="U1skillsw-counter2">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input class='U1skillsw3' size='4'>%<br>
+                                <select class="U1skillsw-counter3">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>+U2</td>
+                            <td>
+                                <input class='U2skillsw1' size='4'>%<br>
+                                <select class="U2skillsw-counter1">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input class='U2skillsw2' size='4'>%<br>
+                                <select class="U2skillsw-counter2">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input class='U2skillsw3' size='4'>%<br>
+                                <select class="U2skillsw-counter3">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>+U3</td>
+                            <td>
+                                <input class='U3skillsw1' size='4'>%<br>
+                                <select class="U3skillsw-counter1">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input class='U3skillsw2' size='4'>%<br>
+                                <select class="U3skillsw-counter2">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input class='U3skillsw3' size='4'>%<br>
+                                <select class="U3skillsw-counter3">
+                                <option value="0">無限次</option>
+                                <option value="1">1次</option>
+                                <option value="2">2次</option>
+                                <option value="3">3次</option>
+                                <option value="4">4次</option>
+                                <option value="5">5次</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='4'>
+                                <hr>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="debug">
+            </div>
+        </div>
+
+        <!-- timeline graph -->
+        <div id="timeline">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div id="U1_sw" style="background-color: #f0d286; font-weight:bold;">0</div>
+                        </td>
+                        <td>
+                            <div id="U2_sw" style="background-color: #38cef3; font-weight:bold;">0</div>
+                        </td>
+                        <td>
+                            <div id="U3_sw" style="background-color: #f088a2;">0</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="height: auto;">
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="U1"></td>
+                        <td id="U2"></td>
+                        <td id="U3"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <script src="skillcalc.js"></script>
+</body>
+
+</html>

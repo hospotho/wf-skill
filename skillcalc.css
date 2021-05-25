@@ -1,0 +1,73 @@
+#container {
+    width: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#dataTables {
+    width: 300px;
+    float: left;
+}
+
+#dataTables>div {
+    position: relative;
+}
+
+table {
+    table-layout: fixed;
+    text-align: center;
+    font-size: 14px;
+}
+
+#dataTables>div>table>tbody>tr>td {
+    width: 80px;
+}
+
+#dataTables>div>table>tbody>tr>td:first-child {
+    vertical-align: top;
+    width: 38px;
+}
+
+.delete {
+    top: 0;
+    right: 0;
+    position: absolute;
+    background-color: Transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+#timeline>table {
+    width: 300px;
+    border-collapse: collapse;
+    font-weight: bold;
+}
+
+#timeline>table>tbody>tr>td {
+    height: 21.5px;
+    width: 100px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+#timeline>table>tbody>tr>td>div {
+    height: 20px;
+    width: 100px;
+}
+
+#U1>div {
+    background-color: #f0d286;
+}
+
+#U2>div {
+    background-color: #38cef3;
+}
+
+#U3>div {
+    background-color: #f088a2;
+}

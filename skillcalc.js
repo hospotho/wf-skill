@@ -4,7 +4,8 @@ var table = document.querySelector("#dataTables");
 var div = document.createElement("div");
 div.id = "add-menu";
 div.style.textAlign = "center";
-div.innerHTML = "<select id='extra-type'><option value='skillsw'>開技充能</option><option value='skillacc'>充能速度</option><option value='exboost'>額外充能</option></select><input type='button' value='+' onclick='insertTable()'>";
+div.innerHTML = "<select id='extra-type'><option value='skillsw'>開技充能</option><option value='skillacc'>充能速度</option><option value='exboost'>額外充能</option></select><input type='button' value='+'>";
+div.lastChild.addEventListener("click", insertTable);
 table.appendChild(div);
 document.querySelectorAll("input,select").forEach(e => {
     e.addEventListener("change", drawTimeline);

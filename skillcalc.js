@@ -3,7 +3,7 @@
 var table = document.querySelector("#dataTables");
 var div = document.createElement("div");
 div.id = "add-menu";
-div.style = "text-align: center";
+div.style.textAlign = "center";
 div.innerHTML = "<select id='extra-type'><option value='skillsw'>開技充能</option><option value='skillacc'>充能速度</option><option value='exboost'>額外充能</option></select><input type='button' value='+' onclick='insertTable()'>";
 table.appendChild(div);
 document.querySelectorAll("input,select").forEach(e => {

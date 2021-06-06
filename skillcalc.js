@@ -233,7 +233,7 @@ function timeline() {
     }
 
     function settleCharge() {
-        if (exboost.length && currentPoint == exboost[0][0]) {
+        while (exboost.length && currentPoint == exboost[0][0]) {
             curCharge[exboost[0][1] - 1] += exboost[0][2] / 100 * sw[exboost[0][1] - 1];
             exboost.shift();
         }

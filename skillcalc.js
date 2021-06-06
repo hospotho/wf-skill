@@ -1,4 +1,4 @@
-/*V1.0*/
+/*V1.1*/
 /*---------------UI---------------*/
 var table = document.querySelector("#dataTables");
 var div = document.createElement("div");
@@ -234,7 +234,7 @@ function timeline() {
 
     function settleCharge() {
         if (exboost.length && currentPoint == exboost[0][0]) {
-            curCharge[exboost[0][1] - 1] += exboost[0][2] * sw[exboost[0][1] - 1];
+            curCharge[exboost[0][1] - 1] += exboost[0][2] / 100 * sw[exboost[0][1] - 1];
             exboost.shift();
         }
         curCharge[0] = Math.min(sw_max[0] * sw[0], curCharge[0]);

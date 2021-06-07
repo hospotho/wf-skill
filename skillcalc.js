@@ -1,4 +1,4 @@
-/*V1.1*/
+/*V1.2*/
 /*---------------UI---------------*/
 var table = document.querySelector("#dataTables");
 var div = document.createElement("div");
@@ -182,7 +182,7 @@ function timeline() {
 
     function nextTimePoint() {
         if (sw[0] > curCharge[0] && sw[1] > curCharge[1] && sw[2] > curCharge[2]) {
-            var next_sw = Math.min((sw[0] - curCharge[0]) / skillacc[0], (sw[1] - curCharge[1]) / skillacc[1], (sw[2] - curCharge[2]) / skillacc[2]);
+            var next_sw = Math.min((sw[0] - curCharge[0]) * 100 / (skillacc[0] * 100), (sw[1] - curCharge[1]) * 100 / (skillacc[1] * 100), (sw[2] - curCharge[2]) * 100 / (skillacc[2] * 100));
             if (exboost.length) {
                 return Math.ceil(currentPoint + Math.min(next_sw, exboost[0][0]));
             } else {
@@ -198,7 +198,7 @@ function timeline() {
             curCharge[0] -= sw[0];
             U1skillsw.forEach(e => {
                 if (e[2] == 0 || skillcounter[0] < e[2]) {
-                    curCharge[e[0] - 1] = curCharge[e[0] - 1] + e[1] / 100 * sw[e[0] - 1];
+                    curCharge[e[0] - 1] = curCharge[e[0] - 1] + e[1] * sw[e[0] - 1] / 100;
                 }
             })
             skillcounter[0] += 1;
@@ -210,7 +210,7 @@ function timeline() {
             curCharge[1] -= sw[1];
             U2skillsw.forEach(e => {
                 if (e[2] == 0 || skillcounter[1] < e[2]) {
-                    curCharge[e[0] - 1] = curCharge[e[0] - 1] + e[1] / 100 * sw[e[0] - 1];
+                    curCharge[e[0] - 1] = curCharge[e[0] - 1] + e[1] * sw[e[0] - 1] / 100;
                 }
             })
             skillcounter[1] += 1;
@@ -222,7 +222,7 @@ function timeline() {
             curCharge[2] -= sw[2];
             U3skillsw.forEach(e => {
                 if (e[2] == 0 || skillcounter[2] < e[2]) {
-                    curCharge[e[0] - 1] = curCharge[e[0] - 1] + e[1] / 100 * sw[e[0] - 1];
+                    curCharge[e[0] - 1] = curCharge[e[0] - 1] + e[1] * sw[e[0] - 1] / 100;
                 }
             })
             skillcounter[2] += 1;

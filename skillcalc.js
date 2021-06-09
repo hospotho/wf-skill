@@ -137,7 +137,7 @@ function update() {
 }
 
 function timeline() {
-    sw.forEach(e => { if (!e) { e = 100000; } });
+    sw.forEach((e, i) => { sw[i] = e ? e : 100000; });
     //init
     eventlist = [];
     var curCharge = [0, 0, 0];
@@ -171,7 +171,7 @@ function timeline() {
             })
             skillcounter[0] += 1;
             skillacc[0] = 1 + U1skillacc.map(e => Math.min(e[1], e[0] * skillcounter[0])).reduce((a, b) => a + b, 0);
-            eventlist.push([1, currentPoint]);
+            eventlist.push([0, currentPoint]);
             return;
         }
         if (sw[1] <= curCharge[1]) {
@@ -183,7 +183,7 @@ function timeline() {
             })
             skillcounter[1] += 1;
             skillacc[1] = 1 + U2skillacc.map(e => Math.min(e[1], e[0] * skillcounter[1])).reduce((a, b) => a + b, 0);
-            eventlist.push([2, currentPoint]);
+            eventlist.push([1, currentPoint]);
             return;
         }
         if (sw[2] <= curCharge[2]) {
@@ -195,7 +195,7 @@ function timeline() {
             })
             skillcounter[2] += 1;
             skillacc[2] = 1 + U3skillacc.map(e => Math.min(e[1], e[0] * skillcounter[2])).reduce((a, b) => a + b, 0);
-            eventlist.push([3, currentPoint]);
+            eventlist.push([2, currentPoint]);
             return;
         }
     }
@@ -228,7 +228,7 @@ function timeline() {
 }
 
 function draw() {
-    sw.forEach(e => { if (e = 100000) { e = 0; } });
+    sw.forEach((e, i) => { sw[i] = e == 100000 ? 0 : e; });
 
     document.querySelector("#U1").innerHTML = "";
     document.querySelector("#U2").innerHTML = "";

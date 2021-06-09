@@ -248,7 +248,7 @@ function draw() {
     ];
     var overflow = [0, 0, 0];
 
-    eventlist.forEach(e, i => {
+    eventlist.forEach((e, i) => {
         var white = document.createElement("div");
         var div = document.createElement("div");
         if (lastEvent[e[0]][0] !== null) {

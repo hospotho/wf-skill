@@ -1,4 +1,4 @@
-/*V1.4*/
+/*V1.5*/
 /*---------------UI---------------*/
 var table = document.querySelector("#dataTables");
 var div = document.createElement("div");
@@ -211,7 +211,7 @@ function timeline() {
     }
 
     var stop = 0
-    while (eventlist.length < 20 && stop < 10 && currentPoint < 5000) {
+    while (eventlist.length < 30 && stop < 10 && currentPoint < 5000) {
         nextPoint = nextTimePoint();
         if (nextPoint == currentPoint) {
             settleSkill();

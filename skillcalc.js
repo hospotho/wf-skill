@@ -211,7 +211,7 @@ function timeline() {
     }
 
     var stop = 0
-    while (eventlist.length < 20 && stop > 10 && currentPoint < 5000) {
+    while (eventlist.length < 20 && stop < 10 && currentPoint < 5000) {
         nextPoint = nextTimePoint();
         if (nextPoint == currentPoint) {
             settleSkill();

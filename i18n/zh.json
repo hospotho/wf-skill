@@ -1,0 +1,29 @@
+{
+    "title": "wf技能軸計算器",
+    "rowStart": "開場充能",
+    "rowMax": "充能上限",
+    "rowSpeed": "充能速度",
+    "rowSW": "技能權重",
+    "skillsw": {
+        "short": "開技充能",
+        "title": "開技充能",
+        "main": "Main",
+        "sub": "Sub",
+        "option": ["無限次", "1次", "2次", "3次", "4次", "5次"]
+    },
+    "skillacc": {
+        "short": "充能速度",
+        "title": "開技充能速度加速",
+        "each": "每次",
+        "limit": "上限"
+    },
+    "exboost": {
+        "short": "額外充能",
+        "title": "額外時點充能",
+        "time": "時點",
+        "charge": "充能"
+    },
+    "setting": {
+        "share": "連結分享"
+    }
+}

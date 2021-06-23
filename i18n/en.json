@@ -1,0 +1,29 @@
+{
+    "title": "wf skill timeline",
+    "rowStart": "Start skill gauge",
+    "rowMax": "Max skill gauge",
+    "rowSpeed": "Skill charge speed",
+    "rowSW": "Skill Cost",
+    "skillsw": {
+        "short": "Skill gauge",
+        "title": "Skill gauge increment",
+        "main": "Main",
+        "sub": "Sub",
+        "option": ["inf times", "1 time", "2 times", "3 times", "4 times", "5 times"]
+    },
+    "skillacc": {
+        "short": "Charge speed",
+        "title": "Skill charge speed increment",
+        "each": "Each",
+        "limit": "Max"
+    },
+    "exboost": {
+        "short": "Time point",
+        "title": "Skill gauge increment at time point",
+        "time": "Time",
+        "charge": "Gauge"
+    },
+    "setting": {
+        "share": "Share by link"
+    }
+}

@@ -7,8 +7,6 @@
     "skillsw": {
         "short": "Skill gauge",
         "title": "Skill gauge increment",
-        "main": "Main",
-        "sub": "Sub",
         "option": ["inf times", "1 time", "2 times", "3 times", "4 times", "5 times"]
     },
     "skillacc": {

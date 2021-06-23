@@ -1,7 +1,62 @@
+#top {
+    position: relative;
+    width: 600px;
+    padding: 21px 0px;
+}
+
+#title {
+    position: absolute;
+    font-size: 18px;
+    top: 8px;
+}
+
+#i18n {
+    position: absolute;
+    font-size: 15px;
+    top: 10px;
+    right: 50px;
+}
+
+#i18n>span {
+    color: blue;
+}
+
+#i18n>span:hover {
+    cursor: pointer;
+}
+
+#setting_icon {
+    position: absolute;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjQgMjQ7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGcgaWQ9ImluZm8iLz48ZyBpZD0iaWNvbnMiPjxwYXRoIGQ9Ik0yMi4yLDE0LjRMMjEsMTMuN2MtMS4zLTAuOC0xLjMtMi43LDAtMy41bDEuMi0wLjdjMS0wLjYsMS4zLTEuOCwwLjctMi43bC0xLTEuN2MtMC42LTEtMS44LTEuMy0yLjctMC43ICAgTDE4LDUuMWMtMS4zLDAuOC0zLTAuMi0zLTEuN1YyYzAtMS4xLTAuOS0yLTItMmgtMkM5LjksMCw5LDAuOSw5LDJ2MS4zYzAsMS41LTEuNywyLjUtMywxLjdMNC44LDQuNGMtMS0wLjYtMi4yLTAuMi0yLjcsMC43ICAgbC0xLDEuN0MwLjYsNy44LDAuOSw5LDEuOCw5LjZMMywxMC4zQzQuMywxMSw0LjMsMTMsMywxMy43bC0xLjIsMC43Yy0xLDAuNi0xLjMsMS44LTAuNywyLjdsMSwxLjdjMC42LDEsMS44LDEuMywyLjcsMC43TDYsMTguOSAgIGMxLjMtMC44LDMsMC4yLDMsMS43VjIyYzAsMS4xLDAuOSwyLDIsMmgyYzEuMSwwLDItMC45LDItMnYtMS4zYzAtMS41LDEuNy0yLjUsMy0xLjdsMS4yLDAuN2MxLDAuNiwyLjIsMC4yLDIuNy0wLjdsMS0xLjcgICBDMjMuNCwxNi4yLDIzLjEsMTUsMjIuMiwxNC40eiBNMTIsMTZjLTIuMiwwLTQtMS44LTQtNGMwLTIuMiwxLjgtNCw0LTRzNCwxLjgsNCw0QzE2LDE0LjIsMTQuMiwxNiwxMiwxNnoiIGlkPSJzZXR0aW5ncyIvPjwvZz48L3N2Zz4=);
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+#setting_icon:hover {
+    cursor: pointer;
+}
+
+#top:after {
+    position: absolute;
+    content: " ";
+    border-top: 1px solid black;
+    top: 35px;
+    min-width: 600px;
+}
+
+hr {
+    border-left: 0px;
+    border-right: 0px;
+}
+
 #container {
+    display: flex;
     width: 600px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding-bottom: 50px;
 }
 
 #dataTables {
@@ -11,6 +66,10 @@
 
 #dataTables>div {
     position: relative;
+}
+
+input {
+    width: 4em;
 }
 
 table {
@@ -30,7 +89,7 @@ table {
 
 .delete {
     top: 0;
-    right: 0;
+    right: 10px;
     position: absolute;
     background-color: Transparent;
     border: none;
@@ -60,14 +119,17 @@ table {
     width: 100px;
 }
 
+#U1_sw,
 #U1>div {
     background-color: #f0d286;
 }
 
+#U2_sw,
 #U2>div {
     background-color: #38cef3;
 }
 
+#U3_sw,
 #U3>div {
     background-color: #f088a2;
 }

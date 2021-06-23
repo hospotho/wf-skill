@@ -1,21 +1,79 @@
-/*V1.5*/
+/*V1.6*/
+/*-----------------i18n----------------*/
+var jsondata = {};
+
+function getJson(lang) {
+    var d = new Date()
+    d.setTime(d.getTime() + 2592000000);
+    document.cookie = "lang=" + lang + "; expires=" + d.toUTCString;
+    var r = new XMLHttpRequest();
+    r.open("GET", "/i18n/" + lang + ".json", false);
+    r.send(null);
+    if (r.status === 200) {
+        jsondata = JSON.parse(r.responseText);
+    }
+}
+
+function changeUI() {
+    document.title = jsondata.title;
+    document.querySelector("#title").innerHTML = jsondata.title;
+    document.querySelector("#rowStart>td").innerHTML = jsondata.rowStart;
+    document.querySelector("#rowMax>td").innerHTML = jsondata.rowMax;
+    document.querySelector("#rowSpeed>td").innerHTML = jsondata.rowSpeed;
+    document.querySelector("#rowSW>td").innerHTML = jsondata.rowSW;
+    //skillsw
+    document.querySelectorAll("#dataTables > div.skillsw > table > tbody > tr:nth-child(1) > td").forEach(e => { e.innerHTML = jsondata.skillsw.title });
+    document.querySelectorAll("select").forEach(e => { e.innerHTML = `<option value="0">${jsondata.skillsw.option[0]}</option><option value="1">${jsondata.skillsw.option[1]}</option><option value="2">${jsondata.skillsw.option[2]}</option><option value="3">${jsondata.skillsw.option[3]}</option><option value="4">${jsondata.skillsw.option[4]}</option><option value="5">${jsondata.skillsw.option[5]}</option>` });
+    //skillacc
+    document.querySelectorAll("#dataTables > div.skillacc > table > tbody > tr:nth-child(1) > td").forEach(e => { e.innerHTML = jsondata.skillacc.title });
+    document.querySelectorAll("#dataTables > div.skillacc > table > tbody > tr:nth-child(2) > td:nth-child(1)").forEach(e => { e.innerHTML = jsondata.skillacc.each });
+    document.querySelectorAll("#dataTables > div.skillacc > table > tbody > tr:nth-child(3) > td:nth-child(1)").forEach(e => { e.innerHTML = jsondata.skillacc.limit });
+    //exboost
+    document.querySelectorAll("#dataTables > div.exboost > table > tbody > tr:nth-child(1) > td").forEach(e => { e.innerHTML = jsondata.exboost.title });
+    document.querySelectorAll("#dataTables > div.exboost > table > tbody > tr:nth-child(2) > td:nth-child(1)").forEach(e => { e.innerHTML = jsondata.exboost.time });
+    document.querySelectorAll("#dataTables > div.exboost > table > tbody > tr:nth-child(3) > td:nth-child(1)").forEach(e => { e.innerHTML = jsondata.exboost.charge });
+    //select
+    document.querySelector("#extra-type").innerHTML = `<option value='skillsw'>${jsondata.skillsw.short}</option><option value='skillacc'>${jsondata.skillacc.short}</option><option value='exboost'>${jsondata.exboost.short}</option>`;
+}
+if (document.cookie) {
+    var lang = document.cookie.substring(document.cookie.length - 2, document.cookie.length);
+    getJson(lang);
+} else {
+    var lang = navigator.language.substring(0, 2);
+    const supportLang = ["en", "zh", "ja"];
+    if (supportLang.indexOf(lang) != -1) {
+        getJson(lang);
+    } else {
+        getJson("en");
+    }
+}
+document.querySelectorAll("#i18n>span").forEach((e) => {
+    e.addEventListener("click", () => {
+        getJson(e.id);
+        changeUI();
+    }, true);
+})
+
 /*---------------UI---------------*/
 var table = document.querySelector("#dataTables");
 var div = document.createElement("div");
 div.id = "add-menu";
 div.style.textAlign = "center";
-div.innerHTML = "<select id='extra-type'><option value='skillsw'>開技充能</option><option value='skillacc'>充能速度</option><option value='exboost'>額外充能</option></select><input type='button' value='+'>";
+div.innerHTML = `<select id='extra-type'><option value='skillsw'>${jsondata.skillsw.short}</option><option value='skillacc'>${jsondata.skillacc.short}</option><option value='exboost'>${jsondata.exboost.short}</option></select><input type='button' style='width: auto;' value='+'>`;
 div.lastChild.addEventListener("click", insertTable);
 table.appendChild(div);
 document.querySelectorAll("input,select").forEach(e => {
     e.addEventListener("change", drawTimeline);
 })
-
-const skillswTable = "<table><tbody><tr><td colspan='4'>開技充能</td></tr><tr><td>+U1</td><td><input class='U1skillsw1' size='4'>%<br><select class='U1skillsw-counter1'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td><td><input class='U1skillsw2' size='4'>%<br><select class='U1skillsw-counter2'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td><td><input class='U1skillsw3' size='4'>%<br><select class='U1skillsw-counter3'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td></tr><tr><td>+U2</td><td><input class='U2skillsw1' size='4'>%<br><select class='U2skillsw-counter1'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td><td><input class='U2skillsw2' size='4'>%<br><select class='U2skillsw-counter2'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td><td><input class='U2skillsw3' size='4'>%<br><select class='U2skillsw-counter3'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td></tr><tr><td>+U3</td><td><input class='U3skillsw1' size='4'>%<br><select class='U3skillsw-counter1'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td><td><input class='U3skillsw2' size='4'>%<br><select class='U3skillsw-counter2'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td><td><input class='U3skillsw3' size='4'>%<br><select class='U3skillsw-counter3'><option value='0'>無限次</option><option value='1'>1次</option><option value='2'>2次</option><option value='3'>3次</option><option value='4'>4次</option><option value='5'>5次</option></select></td></tr><tr><td colspan='4'><hr></td></tr></tbody></table>";
-const skillaccTable = "<table><tbody><tr><td colspan='4'>開技充能速度加速</td></tr><tr><td>每次</td><td> <input class='U1skillacc' size='4'>%</td><td> <input class='U2skillacc' size='4'>%</td><td> <input class='U3skillacc' size='4'>%</td></tr><tr><td>上限</td><td> <input class='U1skillacc-max' size='4'>%</td><td> <input class='U2skillacc-max' size='4'>%</td><td> <input class='U3skillacc-max' size='4'>%</td></tr><tr><td colspan='4'><hr></td></tr></tbody></table>";
-const exboostTable = "<table><tbody><tr><td colspan='4'>額外充能</td></tr><tr><td>時點</td><td> <input class='U1exboost-time' size='4'></td><td> <input class='U2exboost-time' size='4'></td><td> <input class='U3exboost-time' size='4'></td></tr><tr><td>充能</td><td> <input class='U1exboost-charge' size='2'>%</td><td> <input class='U2exboost-charge' size='2'>%</td><td> <input class='U3exboost-charge' size='2'>%</td></tr><tr><td colspan='4'><hr></td></tr></tbody></table>";
+if (document.documentElement.lang != lang) {
+    changeUI();
+}
 
 function insertTable() {
+    const skillswTable = `<table><tbody><tr><td colspan='4'>${jsondata.skillsw.title}</td></tr><tr><td>+U1</td><td><input class='U1skillsw1'>%<br><select class='U1skillsw-counter1'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td><td><input class='U1skillsw2'>%<br><select class='U1skillsw-counter2'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td><td><input class='U1skillsw3'>%<br><select class='U1skillsw-counter3'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td></tr><tr><td>+U2</td><td><input class='U2skillsw1'>%<br><select class='U2skillsw-counter1'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td><td><input class='U2skillsw2'>%<br><select class='U2skillsw-counter2'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td><td><input class='U2skillsw3'>%<br><select class='U2skillsw-counter3'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td></tr><tr><td>+U3</td><td><input class='U3skillsw1'>%<br><select class='U3skillsw-counter1'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td><td><input class='U3skillsw2'>%<br><select class='U3skillsw-counter2'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td><td><input class='U3skillsw3'>%<br><select class='U3skillsw-counter3'><option value='0'>${jsondata.skillsw.option[0]}</option><option value='1'>${jsondata.skillsw.option[1]}</option><option value='2'>${jsondata.skillsw.option[2]}</option><option value='3'>${jsondata.skillsw.option[3]}</option><option value='4'>${jsondata.skillsw.option[4]}</option><option value='5'>${jsondata.skillsw.option[5]}</option></select></td></tr><tr><td colspan='4'><hr></td></tr></tbody></table>`;
+    const skillaccTable = `<table><tbody><tr><td colspan='4'>${jsondata.skillacc.title}</td></tr><tr><td>${jsondata.skillacc.each}</td><td> <input class='U1skillacc'>%</td><td> <input class='U2skillacc'>%</td><td> <input class='U3skillacc'>%</td></tr><tr><td>${jsondata.skillacc.limit}</td><td> <input class='U1skillacc-max'>%</td><td> <input class='U2skillacc-max'>%</td><td> <input class='U3skillacc-max'>%</td></tr><tr><td colspan='4'><hr></td></tr></tbody></table>`;
+    const exboostTable = `<table><tbody><tr><td colspan='4'>${jsondata.exboost.title}</td></tr><tr><td>${jsondata.exboost.time}</td><td> <input class='U1exboost-time'></td><td> <input class='U2exboost-time'></td><td> <input class='U3exboost-time'></td></tr><tr><td>${jsondata.exboost.charge}</td><td> <input class='U1exboost-charge' size='2'>%</td><td> <input class='U2exboost-charge' size='2'>%</td><td> <input class='U3exboost-charge' size='2'>%</td></tr><tr><td colspan='4'><hr></td></tr></tbody></table>`;
+
     var type = document.querySelector("#extra-type").value;
     var div = document.createElement("div");
     div.classList.add(type);
@@ -40,6 +98,7 @@ function insertTable() {
         e.addEventListener("change", drawTimeline);
     })
 }
+
 /*---------------timeline---------------*/
 var sw = [0, 0, 0];
 var sw_max = [1, 1, 1];
@@ -48,10 +107,11 @@ var U1skillsw = [];
 var U2skillsw = [];
 var U3skillsw = [];
 
+var baseacc = [1, 1, 1];
 var U1skillacc = [];
 var U2skillacc = [];
 var U3skillacc = [];
-var skillacc = [1, 1, 1];
+var skillacc = [0, 0, 0];
 
 var exboost = [];
 
@@ -64,10 +124,11 @@ function update() {
     U1skillsw = [];
     U2skillsw = [];
     U3skillsw = [];
+    baseacc = [1, 1, 1];
     U1skillacc = [];
     U2skillacc = [];
     U3skillacc = [];
-    skillacc = [1, 1, 1];
+    skillacc = [0, 0, 0];
     exboost = [];
     //sw
     var u1msw = Number(document.querySelector("#U1mainsw").value);
@@ -112,6 +173,13 @@ function update() {
     U3skillsw1.forEach((e, i) => { if (e) { U1skillsw.push([2, e, U3skillsw_counter1[i]]) } });
     U3skillsw2.forEach((e, i) => { if (e) { U2skillsw.push([2, e, U3skillsw_counter2[i]]) } });
     U3skillsw3.forEach((e, i) => { if (e) { U3skillsw.push([2, e, U3skillsw_counter3[i]]) } });
+    //baseacc
+    var U1speed = document.querySelector("#U1speed").value;
+    var U2speed = document.querySelector("#U2speed").value;
+    var U3speed = document.querySelector("#U3speed").value;
+    baseacc[0] = U1speed ? Number(U1speed) / 100 : 1;
+    baseacc[1] = U2speed ? Number(U2speed) / 100 : 1;
+    baseacc[2] = U3speed ? Number(U3speed) / 100 : 1;
     //skillacc
     var U1skillacc_rate = Array.from(document.querySelectorAll(".U1skillacc")).map(e => e.value ? e.value : 0);
     var U1skillacc_max = Array.from(document.querySelectorAll(".U1skillacc-max")).map(e => e.value ? e.value : 0);
@@ -150,7 +218,7 @@ function timeline() {
 
     function nextTimePoint() {
         if (sw[0] > curCharge[0] && sw[1] > curCharge[1] && sw[2] > curCharge[2]) {
-            var next_sw = Math.min((sw[0] - curCharge[0]) * 100 / (skillacc[0] * 100), (sw[1] - curCharge[1]) * 100 / (skillacc[1] * 100), (sw[2] - curCharge[2]) * 100 / (skillacc[2] * 100));
+            var next_sw = Math.min((sw[0] - curCharge[0]) * 100 / (baseacc[0] * 100 + skillacc[0] * 100), (sw[1] - curCharge[1]) * 100 / (baseacc[1] * 100 + skillacc[1] * 100), (sw[2] - curCharge[2]) * 100 / (baseacc[2] * 100 + skillacc[2] * 100));
             if (exboost.length) {
                 return Math.ceil(Math.min(currentPoint + next_sw, exboost[0][0]));
             } else {
@@ -170,7 +238,7 @@ function timeline() {
                 }
             })
             skillcounter[0] += 1;
-            skillacc[0] = 1 + U1skillacc.map(e => Math.min(e[1], e[0] * skillcounter[0])).reduce((a, b) => a + b, 0);
+            skillacc[0] = U1skillacc.map(e => Math.min(e[1], e[0] * skillcounter[0])).reduce((a, b) => a + b, 0);
             eventlist.push([0, currentPoint]);
             return;
         }
@@ -182,7 +250,7 @@ function timeline() {
                 }
             })
             skillcounter[1] += 1;
-            skillacc[1] = 1 + U2skillacc.map(e => Math.min(e[1], e[0] * skillcounter[1])).reduce((a, b) => a + b, 0);
+            skillacc[1] = U2skillacc.map(e => Math.min(e[1], e[0] * skillcounter[1])).reduce((a, b) => a + b, 0);
             eventlist.push([1, currentPoint]);
             return;
         }
@@ -194,7 +262,7 @@ function timeline() {
                 }
             })
             skillcounter[2] += 1;
-            skillacc[2] = 1 + U3skillacc.map(e => Math.min(e[1], e[0] * skillcounter[2])).reduce((a, b) => a + b, 0);
+            skillacc[2] = U3skillacc.map(e => Math.min(e[1], e[0] * skillcounter[2])).reduce((a, b) => a + b, 0);
             eventlist.push([2, currentPoint]);
             return;
         }
@@ -217,9 +285,9 @@ function timeline() {
             settleSkill();
             stop += 1
         } else {
-            curCharge[0] += (nextPoint - currentPoint) * skillacc[0];
-            curCharge[1] += (nextPoint - currentPoint) * skillacc[1];
-            curCharge[2] += (nextPoint - currentPoint) * skillacc[2];
+            curCharge[0] += (nextPoint - currentPoint) * (baseacc[0] + skillacc[0]);
+            curCharge[1] += (nextPoint - currentPoint) * (baseacc[1] + skillacc[1]);
+            curCharge[2] += (nextPoint - currentPoint) * (baseacc[2] + skillacc[2]);
             currentPoint = nextPoint;
             stop = 0
         }

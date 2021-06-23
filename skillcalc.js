@@ -1,4 +1,4 @@
-/*V1.6*/
+/*V1.7*/
 /*-----------------i18n----------------*/
 var jsondata = {};
 
@@ -34,6 +34,10 @@ function changeUI() {
     document.querySelectorAll("#dataTables > div.exboost > table > tbody > tr:nth-child(3) > td:nth-child(1)").forEach(e => { e.innerHTML = jsondata.exboost.charge });
     //select
     document.querySelector("#extra-type").innerHTML = `<option value='skillsw'>${jsondata.skillsw.short}</option><option value='skillacc'>${jsondata.skillacc.short}</option><option value='exboost'>${jsondata.exboost.short}</option>`;
+    //modal
+    document.querySelector("#modal > div > div > label:nth-child(2)").innerHTML = jsondata.rowStart
+    document.querySelector("#modal > div > div > label:nth-child(4)").innerHTML = jsondata.rowMax
+    document.querySelector("#modal > div > div > label:nth-child(6)").innerHTML = jsondata.rowSpeed
 }
 if (document.cookie) {
     var lang = document.cookie.substring(document.cookie.length - 2, document.cookie.length);
@@ -65,6 +69,37 @@ table.appendChild(div);
 document.querySelectorAll("input,select").forEach(e => {
     e.addEventListener("change", drawTimeline);
 })
+var modal = document.querySelector("#modal");
+document.querySelector("#setting_icon").onclick = () => {
+    modal.style.display = "block";
+}
+document.querySelector("#modal > div > span").onclick = () => {
+    modal.style.display = "none";
+}
+window.onclick = (e) => {
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+}
+document.querySelectorAll("input[type=checkbox]").forEach(e => {
+    e.onclick = (e) => {
+        document.querySelectorAll("input[type=checkbox]").forEach(e => {
+            var row = document.querySelector("#row" + e.id)
+            if (e.checked) {
+                row.style = "";
+                row.nextElementSibling.style = "";
+                row.nextElementSibling.nextElementSibling.style = "";
+            } else {
+                row.style.display = "none";
+                row.nextElementSibling.style.display = "none";
+                row.nextElementSibling.nextElementSibling.style.display = "none";
+            }
+        })
+    }
+})
+document.querySelector("#Start").click();
+
+
 if (document.documentElement.lang != lang) {
     changeUI();
 }

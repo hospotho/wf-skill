@@ -1,4 +1,5 @@
 {
+    "language": "zh",
     "title": "wf技能軸計算器",
     "rowStart": "開場充能",
     "rowMax": "充能上限",
@@ -21,7 +22,5 @@
         "time": "時點",
         "charge": "充能"
     },
-    "setting": {
-        "share": "連結分享"
-    }
+    "share": "生成分享鏈接"
 }

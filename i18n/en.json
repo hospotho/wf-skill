@@ -1,4 +1,5 @@
 {
+    "language": "en",
     "title": "wf skill timeline",
     "rowStart": "Start skill gauge",
     "rowMax": "Max skill gauge",
@@ -21,7 +22,5 @@
         "time": "Time",
         "charge": "Gauge"
     },
-    "setting": {
-        "share": "Share by link"
-    }
+    "share": "Generate Share URL"
 }

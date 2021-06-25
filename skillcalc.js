@@ -6,7 +6,7 @@ function getJson(lang) {
     var d = new Date()
     d.setTime(d.getTime() + 2592000000);
     document.cookie = "lang=" + lang + "; expires=" + d.toUTCString;
-    fetch("/i18n/" + lang + ".json")
+    fetch("https://raw.githubusercontent.com/hospotho/wf-skill/gh-pages/i18n/" + lang + ".json")
         .then(r => r.json())
         .then(r => jsondata = r)
 }

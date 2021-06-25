@@ -100,6 +100,14 @@ table {
     font-size: 10px;
 }
 
+#add-menu {
+    text-align: center;
+}
+
+#add-menu>input[type=button] {
+    width: auto;
+}
+
 #timeline>table {
     width: 300px;
     border-collapse: collapse;
@@ -158,6 +166,11 @@ table {
 
 .modal-content input[type="checkbox"] {
     width: auto;
+}
+
+.modal-content input[type="text"] {
+    width: 100%;
+    margin-top: 10px;
 }
 
 .close {

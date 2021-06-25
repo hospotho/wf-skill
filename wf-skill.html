@@ -97,12 +97,12 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td colspan='4'>Skill gauge increment</td>
+                            <td colspan="4">Skill gauge increment</td>
                         </tr>
                         <tr>
                             <td>+U1</td>
                             <td>
-                                <input class='U1skillsw1'>%<br>
+                                <input class="U1skillsw1">%<br>
                                 <select class="U1skillsw-counter1">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -113,7 +113,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class='U1skillsw2'>%<br>
+                                <input class="U1skillsw2">%<br>
                                 <select class="U1skillsw-counter2">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -124,7 +124,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class='U1skillsw3'>%<br>
+                                <input class="U1skillsw3">%<br>
                                 <select class="U1skillsw-counter3">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -138,7 +138,7 @@
                         <tr>
                             <td>+U2</td>
                             <td>
-                                <input class='U2skillsw1'>%<br>
+                                <input class="U2skillsw1">%<br>
                                 <select class="U2skillsw-counter1">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -149,7 +149,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class='U2skillsw2'>%<br>
+                                <input class="U2skillsw2">%<br>
                                 <select class="U2skillsw-counter2">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -160,7 +160,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class='U2skillsw3'>%<br>
+                                <input class="U2skillsw3">%<br>
                                 <select class="U2skillsw-counter3">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -174,7 +174,7 @@
                         <tr>
                             <td>+U3</td>
                             <td>
-                                <input class='U3skillsw1'>%<br>
+                                <input class="U3skillsw1">%<br>
                                 <select class="U3skillsw-counter1">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -185,7 +185,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class='U3skillsw2'>%<br>
+                                <input class="U3skillsw2">%<br>
                                 <select class="U3skillsw-counter2">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -196,7 +196,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class='U3skillsw3'>%<br>
+                                <input class="U3skillsw3">%<br>
                                 <select class="U3skillsw-counter3">
                                 <option value="0">inf times</option>
                                 <option value="1">1 time</option>
@@ -208,12 +208,20 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan='4'>
+                            <td colspan="4">
                                 <hr>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div id="add-menu">
+                <select id="extra-type">
+                    <option value="skillsw">Skill gauge</option>
+                    <option value="skillacc">Charge speed</option>
+                    <option value="exboost">Time point</option>
+                </select>
+                <input type="button" value="+">
             </div>
         </div>
         <!-- timeline graph -->
@@ -255,6 +263,11 @@
                 <label for="Max">Max skill gauge</label>
                 <input type="checkbox" id="Speed">
                 <label for="Speed">Skill charge speed</label>
+            </div>
+            <br>
+            <div>
+                <button id="copy">Generate Share URL</button>
+                <input id="sharelink" type="text">
             </div>
         </div>
     </div>

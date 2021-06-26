@@ -25,7 +25,7 @@ function changeUI() {
     document.querySelector("#rowSW>td").innerHTML = jsondata.rowSW;
     //skillsw
     document.querySelectorAll("#dataTables > div.skillsw > table > tbody > tr:nth-child(1) > td").forEach(e => { e.innerHTML = jsondata.skillsw.title });
-    document.querySelectorAll("select").forEach(e => { e.innerHTML = `<option value="0">${jsondata.skillsw.option[0]}</option><option value="1">${jsondata.skillsw.option[1]}</option><option value="2">${jsondata.skillsw.option[2]}</option><option value="3">${jsondata.skillsw.option[3]}</option><option value="4">${jsondata.skillsw.option[4]}</option><option value="5">${jsondata.skillsw.option[5]}</option>` });
+    document.querySelectorAll("#dataTables select").forEach(e => { e.innerHTML = `<option value="0">${jsondata.skillsw.option[0]}</option><option value="1">${jsondata.skillsw.option[1]}</option><option value="2">${jsondata.skillsw.option[2]}</option><option value="3">${jsondata.skillsw.option[3]}</option><option value="4">${jsondata.skillsw.option[4]}</option><option value="5">${jsondata.skillsw.option[5]}</option>` });
     //skillacc
     document.querySelectorAll("#dataTables > div.skillacc > table > tbody > tr:nth-child(1) > td").forEach(e => { e.innerHTML = jsondata.skillacc.title });
     document.querySelectorAll("#dataTables > div.skillacc > table > tbody > tr:nth-child(2) > td:nth-child(1)").forEach(e => { e.innerHTML = jsondata.skillacc.each });
@@ -37,9 +37,10 @@ function changeUI() {
     //select
     document.querySelector("#extra-type").innerHTML = `<option value='skillsw'>${jsondata.skillsw.short}</option><option value='skillacc'>${jsondata.skillacc.short}</option><option value='exboost'>${jsondata.exboost.short}</option>`;
     //modal
-    document.querySelector("#modal > div > div > label:nth-child(2)").innerHTML = jsondata.rowStart
-    document.querySelector("#modal > div > div > label:nth-child(4)").innerHTML = jsondata.rowMax
-    document.querySelector("#modal > div > div > label:nth-child(6)").innerHTML = jsondata.rowSpeed
+    document.querySelector("#setHidden > label:nth-child(2)").innerHTML = jsondata.rowStart;
+    document.querySelector("#setHidden > label:nth-child(4)").innerHTML = jsondata.rowMax;
+    document.querySelector("#setHidden > label:nth-child(6)").innerHTML = jsondata.rowSpeed;
+    document.querySelector("#setPriority > label").innerHTML = jsondata.priority;
     document.querySelector("#copy").innerHTML = jsondata.share;
 }
 if (document.cookie) {
@@ -81,9 +82,9 @@ window.onclick = (e) => {
     }
 }
 
-document.querySelectorAll("input[type=checkbox]").forEach(e => {
-    e.onclick = (e) => {
-        document.querySelectorAll("input[type=checkbox]").forEach(e => {
+document.querySelectorAll("#setHidden input[type=checkbox]").forEach(e => {
+    e.onclick = () => {
+        document.querySelectorAll("#setHidden input[type=checkbox]").forEach(e => {
             var row = document.querySelector("#row" + e.id)
             if (e.checked) {
                 row.style = "";
@@ -98,6 +99,15 @@ document.querySelectorAll("input[type=checkbox]").forEach(e => {
     }
 })
 document.querySelector("#Start").click();
+
+document.querySelector("#Priority").onclick = (e) => {
+    var table = document.querySelector("#setPriority>table");
+    if (e.target.checked) {
+        table.style.display = "block";
+    } else {
+        table.style.display = "none";
+    }
+}
 
 if (document.documentElement.lang != lang) { changeUI(); }
 
@@ -136,18 +146,20 @@ function insertTable(input = "") {
 /*---------------timeline---------------*/
 var sw = [0, 0, 0];
 var sw_max = [1, 1, 1];
-
-var U1skillsw = [];
-var U2skillsw = [];
-var U3skillsw = [];
-
+var skillsw = [
+    [],
+    [],
+    []
+];
 var baseacc = [1, 1, 1];
-var U1skillacc = [];
-var U2skillacc = [];
-var U3skillacc = [];
-var skillacc = [0, 0, 0];
-
+var skillacc = [
+    [],
+    [],
+    []
+];
+var exacc = [0, 0, 0];
 var exboost = [];
+var priority = [0, 0, 0]
 
 var eventlist = [];
 
@@ -155,15 +167,20 @@ function update() {
     //init
     sw = [0, 0, 0];
     sw_max = [1, 1, 1];
-    U1skillsw = [];
-    U2skillsw = [];
-    U3skillsw = [];
+    skillsw = [
+        [],
+        [],
+        []
+    ];
     baseacc = [1, 1, 1];
-    U1skillacc = [];
-    U2skillacc = [];
-    U3skillacc = [];
-    skillacc = [0, 0, 0];
+    skillacc = [
+        [],
+        [],
+        []
+    ];
+    exacc = [0, 0, 0];
     exboost = [];
+    priority = [0, 0, 0];
     //sw
     var u1msw = Number(document.querySelector("#U1mainsw").value);
     var u1ssw = Number(document.querySelector("#U1subsw").value);
@@ -201,15 +218,15 @@ function update() {
     var U3skillsw3 = Array.from(document.querySelectorAll(".U3skillsw3")).map(e => e.value ? Number(e.value) : 0);
     var U3skillsw_counter3 = Array.from(document.querySelectorAll(".U3skillsw-counter3")).map(e => e.value ? Number(e.value) : 0);
     //skillsw to list
-    U1skillsw1.forEach((e, i) => { if (e) { U1skillsw.push([0, e, U1skillsw_counter1[i]]) } });
-    U1skillsw2.forEach((e, i) => { if (e) { U2skillsw.push([0, e, U1skillsw_counter2[i]]) } });
-    U1skillsw3.forEach((e, i) => { if (e) { U3skillsw.push([0, e, U1skillsw_counter3[i]]) } });
-    U2skillsw1.forEach((e, i) => { if (e) { U1skillsw.push([1, e, U2skillsw_counter1[i]]) } });
-    U2skillsw2.forEach((e, i) => { if (e) { U2skillsw.push([1, e, U2skillsw_counter2[i]]) } });
-    U2skillsw3.forEach((e, i) => { if (e) { U3skillsw.push([1, e, U2skillsw_counter3[i]]) } });
-    U3skillsw1.forEach((e, i) => { if (e) { U1skillsw.push([2, e, U3skillsw_counter1[i]]) } });
-    U3skillsw2.forEach((e, i) => { if (e) { U2skillsw.push([2, e, U3skillsw_counter2[i]]) } });
-    U3skillsw3.forEach((e, i) => { if (e) { U3skillsw.push([2, e, U3skillsw_counter3[i]]) } });
+    U1skillsw1.forEach((e, i) => { if (e) { skillsw[0].push([0, e, U1skillsw_counter1[i]]) } });
+    U1skillsw2.forEach((e, i) => { if (e) { skillsw[1].push([0, e, U1skillsw_counter2[i]]) } });
+    U1skillsw3.forEach((e, i) => { if (e) { skillsw[2].push([0, e, U1skillsw_counter3[i]]) } });
+    U2skillsw1.forEach((e, i) => { if (e) { skillsw[0].push([1, e, U2skillsw_counter1[i]]) } });
+    U2skillsw2.forEach((e, i) => { if (e) { skillsw[1].push([1, e, U2skillsw_counter2[i]]) } });
+    U2skillsw3.forEach((e, i) => { if (e) { skillsw[2].push([1, e, U2skillsw_counter3[i]]) } });
+    U3skillsw1.forEach((e, i) => { if (e) { skillsw[0].push([2, e, U3skillsw_counter1[i]]) } });
+    U3skillsw2.forEach((e, i) => { if (e) { skillsw[1].push([2, e, U3skillsw_counter2[i]]) } });
+    U3skillsw3.forEach((e, i) => { if (e) { skillsw[2].push([2, e, U3skillsw_counter3[i]]) } });
     //baseacc
     var U1speed = document.querySelector("#U1speed").value;
     var U2speed = document.querySelector("#U2speed").value;
@@ -224,9 +241,9 @@ function update() {
     var U2skillacc_max = Array.from(document.querySelectorAll(".U2skillacc-max")).map(e => e.value ? Number(e.value) : 0);
     var U3skillacc_rate = Array.from(document.querySelectorAll(".U3skillacc")).map(e => e.value ? Number(e.value) : 0);
     var U3skillacc_max = Array.from(document.querySelectorAll(".U3skillacc-max")).map(e => e.value ? Number(e.value) : 0);
-    U1skillacc_rate.forEach((e, i) => { if (e) { U1skillacc.push([e / 100, U1skillacc_max[i] / 100]) } });
-    U2skillacc_rate.forEach((e, i) => { if (e) { U2skillacc.push([e / 100, U2skillacc_max[i] / 100]) } });
-    U3skillacc_rate.forEach((e, i) => { if (e) { U3skillacc.push([e / 100, U3skillacc_max[i] / 100]) } });
+    U1skillacc_rate.forEach((e, i) => { if (e) { skillacc[0].push([e / 100, U1skillacc_max[i] / 100]) } });
+    U2skillacc_rate.forEach((e, i) => { if (e) { skillacc[1].push([e / 100, U2skillacc_max[i] / 100]) } });
+    U3skillacc_rate.forEach((e, i) => { if (e) { skillacc[2].push([e / 100, U3skillacc_max[i] / 100]) } });
     //exboost
     var U1_exboost_time = Array.from(document.querySelectorAll(".U1exboost-time")).map(e => e.value != "" ? Number(e.value) : "");
     var U1_exboost_charge = Array.from(document.querySelectorAll(".U1exboost-charge")).map(e => e.value ? Number(e.value) : 0);
@@ -239,6 +256,12 @@ function update() {
     U2_exboost_time.forEach((e, i) => { if (e !== "") { exboost.push([Math.ceil(e), 1, U2_exboost_charge[i] / 100]); } });
     U3_exboost_time.forEach((e, i) => { if (e !== "") { exboost.push([Math.ceil(e), 2, U3_exboost_charge[i] / 100]); } });
     exboost.sort((a, b) => a[0] - b[0]);
+    //priority
+    if (document.querySelector("#Priority").checked) {
+        document.querySelectorAll("#setPriority select").forEach((e, i) => {
+            priority[i] = e.value;
+        })
+    }
 }
 
 function timeline() {
@@ -255,7 +278,7 @@ function timeline() {
 
     function nextTimePoint() {
         if (sw[0] > curCharge[0] && sw[1] > curCharge[1] && sw[2] > curCharge[2]) {
-            var next_sw = Math.min((sw[0] - curCharge[0]) * 100 / (baseacc[0] * 100 + skillacc[0] * 100), (sw[1] - curCharge[1]) * 100 / (baseacc[1] * 100 + skillacc[1] * 100), (sw[2] - curCharge[2]) * 100 / (baseacc[2] * 100 + skillacc[2] * 100));
+            var next_sw = Math.min((sw[0] - curCharge[0]) * 100 / (baseacc[0] * 100 + exacc[0] * 100), (sw[1] - curCharge[1]) * 100 / (baseacc[1] * 100 + exacc[1] * 100), (sw[2] - curCharge[2]) * 100 / (baseacc[2] * 100 + exacc[2] * 100));
             if (exboost.length) {
                 return Math.ceil(Math.min(currentPoint + next_sw, exboost[0][0]));
             } else {
@@ -267,41 +290,24 @@ function timeline() {
     }
 
     function settleSkill() {
-        if (sw[0] <= curCharge[0]) {
-            curCharge[0] -= sw[0];
-            U1skillsw.forEach(e => {
-                if (e[2] == 0 || skillcounter[0] < e[2]) {
-                    curCharge[e[0]] = curCharge[e[0]] + e[1] * sw[e[0]] / 100;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (priority[j] == i) {
+                    //check
+                    if (sw[j] <= curCharge[j]) {
+                        curCharge[j] -= sw[j];
+                        skillsw[j].forEach(e => {
+                            if (e[2] == 0 || skillcounter[j] < e[2]) {
+                                curCharge[e[0]] = curCharge[e[0]] + e[1] * sw[e[0]] / 100;
+                            }
+                        })
+                        skillcounter[j] += 1;
+                        exacc[j] = skillacc[j].map(e => Math.min(e[1], e[0] * skillcounter[j])).reduce((a, b) => a + b, 0);
+                        eventlist.push([j, currentPoint]);
+                        return;
+                    }
                 }
-            })
-            skillcounter[0] += 1;
-            skillacc[0] = U1skillacc.map(e => Math.min(e[1], e[0] * skillcounter[0])).reduce((a, b) => a + b, 0);
-            eventlist.push([0, currentPoint]);
-            return;
-        }
-        if (sw[1] <= curCharge[1]) {
-            curCharge[1] -= sw[1];
-            U2skillsw.forEach(e => {
-                if (e[2] == 0 || skillcounter[1] < e[2]) {
-                    curCharge[e[0]] = curCharge[e[0]] + e[1] * sw[e[0]] / 100;
-                }
-            })
-            skillcounter[1] += 1;
-            skillacc[1] = U2skillacc.map(e => Math.min(e[1], e[0] * skillcounter[1])).reduce((a, b) => a + b, 0);
-            eventlist.push([1, currentPoint]);
-            return;
-        }
-        if (sw[2] <= curCharge[2]) {
-            curCharge[2] -= sw[2];
-            U3skillsw.forEach(e => {
-                if (e[2] == 0 || skillcounter[2] < e[2]) {
-                    curCharge[e[0]] = curCharge[e[0]] + e[1] * sw[e[0]] / 100;
-                }
-            })
-            skillcounter[2] += 1;
-            skillacc[2] = U3skillacc.map(e => Math.min(e[1], e[0] * skillcounter[2])).reduce((a, b) => a + b, 0);
-            eventlist.push([2, currentPoint]);
-            return;
+            }
         }
     }
 
@@ -322,9 +328,9 @@ function timeline() {
             settleSkill();
             stop += 1
         } else {
-            curCharge[0] += (nextPoint - currentPoint) * (baseacc[0] + skillacc[0]);
-            curCharge[1] += (nextPoint - currentPoint) * (baseacc[1] + skillacc[1]);
-            curCharge[2] += (nextPoint - currentPoint) * (baseacc[2] + skillacc[2]);
+            curCharge[0] += (nextPoint - currentPoint) * (baseacc[0] + exacc[0]);
+            curCharge[1] += (nextPoint - currentPoint) * (baseacc[1] + exacc[1]);
+            curCharge[2] += (nextPoint - currentPoint) * (baseacc[2] + exacc[2]);
             currentPoint = nextPoint;
             stop = 0
         }

@@ -22,5 +22,6 @@
         "time": "Time",
         "charge": "Gauge"
     },
-    "share": "Generate Share URL"
+    "share": "Generate Share URL",
+    "priority": "Skill priority"
 }

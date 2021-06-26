@@ -256,7 +256,7 @@
     <div id="modal">
         <div class="modal-content">
             <span class="close">X</span>
-            <div>
+            <div id="setHidden">
                 <input type="checkbox" id="Start">
                 <label for="Start">Start skill gauge</label>
                 <input type="checkbox" id="Max">
@@ -264,8 +264,43 @@
                 <input type="checkbox" id="Speed">
                 <label for="Speed">Skill charge speed</label>
             </div>
-            <br>
-            <div>
+            <div id="setPriority">
+                <input type="checkbox" id="Priority">
+                <label for="Priority">Skill priority</label>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>U1</td>
+                            <td>U2</td>
+                            <td>U3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="U1priority">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="U2priority">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="U3priority">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="genSharelink">
                 <button id="copy">Generate Share URL</button>
                 <input id="sharelink" type="text">
             </div>

@@ -574,7 +574,7 @@
         }
         //priority
         if (prFlag) {
-            result += nts(U1priority * 9 + U2priority * 3 + U3priority, dataSize.pr)
+            result += nts_dict.hts(U1priority * 9 + U2priority * 3 + U3priority, dataSize.pr)
         }
         document.querySelector("#sharelink").value = document.location.origin + document.location.pathname + "?" + bitToBase64(result);
 
@@ -677,7 +677,7 @@
         //pr
         if (headerList[8]) {
             document.querySelector("#Priority").click();
-            var prSum = tempGetNext(dataSize.pr);
+            var prSum = ((r) => { return r ? r : 0 })(stn_dict.sth(temp.slice(index, index + dataSize.pr), dataSize.pr));
             document.querySelector("#U1priority").value = Math.floor(prSum / 9);
             document.querySelector("#U2priority").value = Math.floor(prSum % 9 / 3);
             document.querySelector("#U3priority").value = prSum % 3;

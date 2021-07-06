@@ -594,15 +594,15 @@
         for (index = 0; index < dataSize.header * 9; index += 2) {
             headerList.push(stn_dict.sth(temp.slice(index, index + 2)));
         }
-        if (headerList[0] == header.UNSIGNED_INT) {
+        if (headerList[0] == parseInt(header.UNSIGNED_INT, 2)) {
             stn = stn_dict.stui;
-        } else if (headerList[0] == header.SIGNED_INT) {
+        } else if (headerList[0] == parseInt(header.SIGNED_INT, 2)) {
             for (var key in thisDataSize) { thisDataSize[key] += 1; }
             stn = stn_dict.stsi;
-        } else if (headerList[0] == header.UNSIGNED_2DP) {
+        } else if (headerList[0] == parseInt(header.UNSIGNED_2DP, 2)) {
             for (var key in thisDataSize) { thisDataSize[key] += 7; }
             stn = stn_dict.stuf;
-        } else if (headerList[0] == header.SIGNED_2DP) {
+        } else if (headerList[0] == parseInt(header.SIGNED_2DP, 2)) {
             for (var key in thisDataSize) { thisDataSize[key] += 8; }
             stn = stn_dict.stsf;
         }

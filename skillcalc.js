@@ -512,7 +512,7 @@
         var prFlag = U1priority || U2priority || U3priority ? 1 : 0;
         //join data
         var result = "";
-        var thisDataSize = dataSize;
+        var thisDataSize = {...dataSize };
         var nts = null;
         if (negFlag) {
             if (floatFlag) {
@@ -588,7 +588,7 @@
         console.log("restoring data");
         var temp = base64Tobit(document.location.search.slice(1 - document.location.search.length));
         var stn = null;
-        var thisDataSize = dataSize;
+        var thisDataSize = {...dataSize };
         var index = 0;
         var headerList = [];
         for (index = 0; index < dataSize.header * 9; index += 2) {

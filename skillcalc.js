@@ -512,12 +512,12 @@
         var prFlag = U1priority || U2priority || U3priority ? 1 : 0;
         //join data
         var result = "";
-        var thisDataSize = dataSize;
+        var thisDataSize = {...dataSize };
         var nts = null;
         if (negFlag) {
             if (floatFlag) {
                 result += header.SIGNED_2DP;
-                for (var key in thisDataSize) { thisDataSize[key] += 9; }
+                for (var key in thisDataSize) { thisDataSize[key] += 8; }
                 nts = nts_dict.sfts;
             } else {
                 result += header.SIGNED_INT;
@@ -527,7 +527,7 @@
         } else {
             if (floatFlag) {
                 result += header.UNSIGNED_2DP;
-                for (var key in thisDataSize) { thisDataSize[key] += 8; }
+                for (var key in thisDataSize) { thisDataSize[key] += 7; }
                 nts = nts_dict.ufts;
             } else {
                 result += header.UNSIGNED_INT;
@@ -588,21 +588,21 @@
         console.log("restoring data");
         var temp = base64Tobit(document.location.search.slice(1 - document.location.search.length));
         var stn = null;
-        var thisDataSize = dataSize;
+        var thisDataSize = {...dataSize };
         var index = 0;
         var headerList = [];
         for (index = 0; index < dataSize.header * 9; index += 2) {
             headerList.push(stn_dict.sth(temp.slice(index, index + 2)));
         }
-        if (headerList[0] == header.UNSIGNED_INT) {
+        if (headerList[0] == parseInt(header.UNSIGNED_INT, 2)) {
             stn = stn_dict.stui;
-        } else if (headerList[0] == header.SIGNED_INT) {
+        } else if (headerList[0] == parseInt(header.SIGNED_INT, 2)) {
             for (var key in thisDataSize) { thisDataSize[key] += 1; }
             stn = stn_dict.stsi;
-        } else if (headerList[0] == header.UNSIGNED_2DP) {
+        } else if (headerList[0] == parseInt(header.UNSIGNED_2DP, 2)) {
             for (var key in thisDataSize) { thisDataSize[key] += 7; }
             stn = stn_dict.stuf;
-        } else if (headerList[0] == header.SIGNED_2DP) {
+        } else if (headerList[0] == parseInt(header.SIGNED_2DP, 2)) {
             for (var key in thisDataSize) { thisDataSize[key] += 8; }
             stn = stn_dict.stsf;
         }

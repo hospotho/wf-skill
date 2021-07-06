@@ -517,7 +517,7 @@
         if (negFlag) {
             if (floatFlag) {
                 result += header.SIGNED_2DP;
-                for (var key in thisDataSize) { thisDataSize[key] += 9; }
+                for (var key in thisDataSize) { thisDataSize[key] += 8; }
                 nts = nts_dict.sfts;
             } else {
                 result += header.SIGNED_INT;
@@ -527,7 +527,7 @@
         } else {
             if (floatFlag) {
                 result += header.UNSIGNED_2DP;
-                for (var key in thisDataSize) { thisDataSize[key] += 8; }
+                for (var key in thisDataSize) { thisDataSize[key] += 7; }
                 nts = nts_dict.ufts;
             } else {
                 result += header.UNSIGNED_INT;
